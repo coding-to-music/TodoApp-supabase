@@ -1,4 +1,4 @@
-# How to Build a TodoApp using ReactJS, NextJS, and Supabase
+# How to Build a TodoApp using ReactJS, NextJS, and Supabase, deploy on Vercel
 
 By Sharvin Shah https://www.freecodecamp.org/news/author/sharvin/
 
@@ -139,11 +139,13 @@ Under the Project API keys section, you'll see two types of keys:
 
 
 Supabase Project API Keys
+
 anon is a public API key and it can be used on the client-side.
 
 service_role is a private API key and you use it on the server-side only. This key can bypass the row-level security and mutate the data.
 
-What is Row Level Security in Supabase?
+## What is Row Level Security in Supabase?
+
 You might be wondering – what is row-level security and why it is so important?
 
 Well, Supabase has a client library to access data directly from the browser and for that, we use the anon key. As the anon key is on the client, anyone can have access to the key via the network tab.
@@ -164,6 +166,7 @@ Go to the SQL section from the sidebar and click on New query.
 ![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
 SQL section from Supabase panel
+
 Click on New Query and copy-paste the following code:
 
 ```java
@@ -293,6 +296,7 @@ Here you'll see the following view:
 
 
 Supabase Database Replication Section
+
 Click on the 1 table button under source and then toggle the switch for todos. It will enable a real-time server for our todos also.
 
 Now suppose we want to disable row-level security for todos (note that this is not advisable), but just for the scope of the article to understand how to, we will disable it.
@@ -303,6 +307,7 @@ Go to the Authentication section and, inside that, go to the Policies.
 
 
 Authentication section from Supabase panel
+
 Now you'll see the todos section with RLS enabled written in the green box. Click on the Disable RLS option at the top right-hand corner of this box. It will disable the row-level security for our application.
 
 # How to Implement Sign In Using Supabase
@@ -490,6 +495,7 @@ You'll get the following output:
 ![Todo App Home Screen](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Todo App Home Screen")
 
 Todo App Home Screen
+
 Now under the pages directory, create a file named signin.js and copy-paste the following code:
 
 ```java
@@ -2240,6 +2246,7 @@ Once you've created your account you'll be directed to a dashboard that looks li
 ![Vercel Dashboard](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Dashboard")
 
 Vercel Dashboard
+
 Click on the New Project button. It will ask you to install the Vercel bot and permissions.
 
 Note: You can allow the Vercel bot to read all repositories from your GitHub account or give permission for the currently created repository.
@@ -2257,6 +2264,7 @@ Now it will ask if you want to create a team. Team is a feature available under 
 ![Vercel Create Team](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.33.19-PM.png?raw=true "Vercel Create Team")
 
 Vercel Create Team 
+
 Now you'll need to add environment variables. Add them from .env.local.
 
 Click on the Accordion that's in front of Environment Variables and add the variables over there as follows:
@@ -2265,18 +2273,21 @@ Click on the Accordion that's in front of Environment Variables and add the vari
 ![Vercel Configure Env and Build Settings](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.34.22-PM.png?raw=true "Vercel Configure Env and Build Settings")
 
 Vercel Configure Env and Build Settings
+
 Once they are added, click on the Deploy button. After the deployment is successful you'll get the following screen:
 
 
 ![Vercel Deployment Success](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.39.20-PM.png?raw=true "Vercel Deployment Success")
 
 Vercel Deployment Success
+
 Now click on the gray box where your application is shown. It will redirect you to a page where you can find preconfigured domain for your applications.
 
 
 ![Vercel Project Overview](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.42.16-PM.png?raw=true "Vercel Project Overview")
 
 Vercel Project Overview
+
 Yes vercel provides subdomains for which we can set a custom domain also. For now we will use the Vercel domain. Copy the first domain under the Domains section and go to your Supabase project.
 
 Go to Authentication > Settings and update the Site URL and Additional Redirect URLs to the copied URL (make sure to add https:// in front of the copied URL):
