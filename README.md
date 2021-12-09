@@ -1,4 +1,4 @@
-# How to Build a TodoApp using ReactJS, NextJS, and Supabase, deploy on Vercel
+# How to Build a TodoApp using ReactJS, NextJS, Chakra UI, and Supabase, deploy on Vercel
 
 By Sharvin Shah https://www.freecodecamp.org/news/author/sharvin/
 
@@ -1317,10 +1317,11 @@ All Todos
 
 Updating the todo mechanism might be complex for beginners. So I'll explain the process as simply as I can:
 
-We create a todo state in our parent component of index.js. This todo state is updated when user clicks on SingleTodo.
-We pass an openHandler function for doing that. This function updates the todo state with the clicked todo detail and opens the modal.
-In ManageTodo.js we have written a useEffect with a dependency of todo which updates the values of title, description, and isComplete whenever the todo changes.
-At last we update the todo in our table using the Supbase update method on the basis of todo id.
+- We create a todo state in our parent component of index.js. This todo state is updated when user clicks on SingleTodo.
+- We pass an openHandler function for doing that. This function updates the todo state with the clicked todo detail and opens the modal.
+- In ManageTodo.js we have written a useEffect with a dependency of todo which updates the values of title, description, and isComplete whenever the todo changes.
+- At last we update the todo in our table using the Supbase update method on the basis of todo id.
+
 Time to implement the code. Under the components directory, go to SingleTodo.js and replace the code with the following:
 
 ```java
@@ -2226,7 +2227,8 @@ Now you can use the update method to update your username, website URL, and bio.
 
 With this our TodoApp is completed and ready for production.
 
-How to Deploy the App to Vercel and Configure Supabase Authentication
+## How to Deploy the App to Vercel and Configure Supabase Authentication
+
 Before deploying the application on Vercel we need to run the npm run build command and check the terminal output to see if we have any errors.
 
 There are two ways to configure an application on Vercel:
