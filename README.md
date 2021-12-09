@@ -127,7 +127,11 @@ Once you've created your account, click on New project where it will ask for the
 
 Once the organization is selected, Supabase will ask for the project name, database password, and region.
 
+REAL ONE
+
 ![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+
+REAL ONE
 
 Fill out this form and click on the Create new project button.
 
@@ -135,8 +139,7 @@ Supabase will start setting up the application. It may take a few minutes to set
 
 Under the Project API keys section, you'll see two types of keys:
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
-
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.48.10-PM.png?raw=true "XXXXXXXXX")
 
 Supabase Project API Keys
 
@@ -163,7 +166,7 @@ Now let's create a script to create tables in our database.
 
 Go to the SQL section from the sidebar and click on New query.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.59.51-PM.png?raw=true "XXXXXXXXX")
 
 SQL section from Supabase panel
 
@@ -272,27 +275,27 @@ Success. No rows returned
 
 To confirm our tables are generated, go to the table editor section from the sidebar.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.28.59-PM.png?raw=true "XXXXXXXXX")
 
 Table Editor section from Supabase panel
 
 Inside the table editor, you'll find our tables generated successfully.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.33.43-PM.png?raw=true "XXXXXXXXX")
 
 
 Supabase Table sidebar
 
 As you can see in the above Todos Script, we didn't enable real-time. To enable a real-time server, we need to go to the Database > Replication section.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.36.33-PM.png?raw=true "XXXXXXXXX")
 
 
 Database section from Supabase panel
 
 Here you'll see the following view:
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.38.08-PM.png?raw=true "XXXXXXXXX")
 
 
 Supabase Database Replication Section
@@ -303,7 +306,7 @@ Now suppose we want to disable row-level security for todos (note that this is n
 
 Go to the Authentication section and, inside that, go to the Policies.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.41.50-PM.png?raw=true "XXXXXXXXX")
 
 
 Authentication section from Supabase panel
@@ -315,9 +318,6 @@ The code for this section is available under this commit if you need to refer to
 
 GitHub - Sharvin26/TodoApp-supabase at b253c904f2f39ac80808620cf51c9584bfa90f4d
 A todoapp built using Supabase, ReactJS, NextJS and Chakra UI - GitHub - Sharvin26/TodoApp-supabase at b253c904f2f39ac80808620cf51c9584bfa90f4d
-
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
-
 
 Sharvin26
 
@@ -492,7 +492,7 @@ npm run dev
 You'll get the following output:
 
 
-![Todo App Home Screen](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Todo App Home Screen")
+![Todo App Home Screen](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-04-at-10.03.31-PM-2.png?raw=true "Todo App Home Screen")
 
 Todo App Home Screen
 
@@ -699,7 +699,7 @@ We use SIGNED_IN event to set a cookie by calling /api/auth which uses another m
 Now let's restart our server using npm run dev and then go to http://localhost:3000/signin. You'll see the following UI:
 
 
-![Todo SignIn Page](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Todo SignIn Page")
+![Todo SignIn Page](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-04-at-10.50.26-PM.png?raw=true "Todo SignIn Page")
 
 Todo SignIn Page
 
@@ -825,7 +825,7 @@ Go to http://localhost:3000 and click on the Logout button.
 The cookie will be cleared from the browser, and the user will get redirected to the sign-in page.
 
 
-![TodoApp Home Page](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "TodoApp Home Page")
+![TodoApp Home Page](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-05-at-11.54.09-AM.png?raw=true "TodoApp Home Page")
 
 TodoApp Home Page
 
@@ -1040,9 +1040,11 @@ const { error } = await supabaseClient
       .from("todos")
       .insert([{ title, description, isComplete, user_id: user.id }]);
 This just inserts a new todo inside our supabase table.
+```
 
 Now let's go to pages > index.js file and copy paste the following code:
 
+```java
 import { useDisclosure } from "@chakra-ui/hooks";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -1092,7 +1094,7 @@ Here we are using useDisclosure hook from Chakra to maintain the modal state. Be
 Now go to http://localhost:3000 and click on Add Todo Button. You'll see the following screen:
 
 
-![Add Todo Modal](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Add Todo Modal")
+![Add Todo Modal](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-06-at-7.24.27-PM.png?raw=true "Add Todo Modal")
 
 Add Todo Modal
 
@@ -1309,7 +1311,7 @@ Note: the Supabase docs suggest not using real time subscription on a server-sid
 Now go to http://localhost:3000 and add a todo. You'll see the following view:
 
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-06-at-8.09.06-PM.png?raw=true "XXXXXXXXX")
 
 All Todos
 
@@ -1668,7 +1670,7 @@ Here we add the ManageTodo component that we created and pass props that are use
 Now go to http://localhost:3000 and click on any todo to update it and you'll see the following view:
 
 
-![Update Todo](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Update Todo")
+![Update Todo](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-06-at-8.10.10-PM.png?raw=true "Update Todo")
 
 Update Todo
 
@@ -1910,7 +1912,7 @@ For the useEffect which has the todoListener we add an if condition based on an 
 Go to http://localhost:3000 and you'll see the following view:
 
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-1.37.34-PM.png?raw=true "XXXXXXXXX")
 
 Click the Delete button and you'll see that the todo is gone from our todos view.
 
@@ -2001,11 +2003,11 @@ To store our pictures we will be using Supabase storage. By default these storag
 Go to https://app.supabase.io/ and go to the storage tab. There you'll see the avatars listed under All Buckets.
 
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.43.07-PM.png?raw=true "XXXXXXXXX")
 
 Click on the three dots and select the Make public option.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.43.31-PM.png?raw=true "XXXXXXXXX")
 
 
 Back to our code: inside the pages directory create a file named profile.js and copy paste the following code:
@@ -2221,7 +2223,7 @@ The upload method from Supabase uploads the image while the getPublicUrl method 
 Visit http://localhost:3000 and click on profile link. You'll see the following view:
 
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.55.59-PM.png?raw=true "XXXXXXXXX")
 
 Now you can use the update method to update your username, website URL, and bio.
 
@@ -2245,7 +2247,7 @@ If you haven't created an account on Vercel, then you can go to https://vercel.c
 Once you've created your account you'll be directed to a dashboard that looks like this:
 
 
-![Vercel Dashboard](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Dashboard")
+![Vercel Dashboard](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.55.59-PM.png?raw=true "Vercel Dashboard")
 
 Vercel Dashboard
 
