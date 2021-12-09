@@ -83,59 +83,59 @@ Supabase provides the following services:
 Now let's understand how it works:
 
 
-
-
 ![Architectural Diagram from Supabase documentation](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.12.37-PM.png?raw=true "Architectural Diagram from Supabase documentation")
-
-![Architectural Diagram from Supabase documentation](
-    https://raw.githubusercontent.com/coding-to-music/TodoApp-supabase/main/images/011119_1057_PostmanTuto7.png "Architectural Diagram from Supabase documentation")
-
-
 
 Alright, what's going on here?
 
-As you already know, Supabase uses Postgres as a database – but it also has many other components which provide different services.
+As you already know, `Supabase` uses `Postgres` as a database – but it also has many other components which provide different services.
 
-One of my favorites is Realtime. Supabase uses the Elixir server to set up a web socket connection to listen for insert, update, and delete the events.
+One of my favorites is `Realtime`. Supabase uses the `Elixir` server to set up a web socket connection to listen for insert, update, and delete the events.
 
-PostgRest directly converts the Postgres database into a Rest API.
+`PostgRest` directly converts the Postgres database into a Rest API.
 
-GoTrue is an API for managing users and issuing SWT tokens.
+`GoTrue` is an API for managing users and issuing SWT tokens.
 
-Postgres-Meta is a Restful API for managing the Postgres database.
+`Postgres-Meta` is a Restful API for managing the Postgres database.
 
-Kong is an API gateway.
+`Kong` is an API gateway.
 
-Note: All these definitions are taken from the supabase documentation. To read more about how Supabase works, you can visit their documentation.
+Note: All these definitions are taken from the supabase documentation. To read more about how Supabase works, you can visit their documentation. https://supabase.io/docs
+
 And with that, we're ready to dive into our project. Here's what we'll cover:
 
-Table of Contents
-How to configure Supabase tables, auth, and storage
-How to implement sign-in using Supabase
-How to show all todos, add new todos, and update and delete todos
-How to update profile details and avatar
-How to deploy the app to Vercel and configure Supabase authentication
+# Table of Contents
+- [How to configure Supabase tables, auth, and storage]()
+- [How to implement sign-in using Supabase]()
+- [How to show all todos, add new todos, and update and delete todos]()
+- [How to update profile details and avatar]()
+- [How to deploy the app to Vercel and configure Supabase authentication]()
+
 I am going to divide this tutorial into four separate sections. At the start of every section, you will find a Git commit that has the code developed in that section. Also If you want to see the complete code, then it is available in this repository.
 
-How to Configure Supabase Tables, Auth, and Storage
+https://github.com/Sharvin26/TodoApp-supabase
+
+## How to Configure Supabase Tables, Auth, and Storage
 In this section, we'll implement the following functionality:
 
-Create a Supabase project.
-Setup authentication for users and policies.
-Configure database and policies for users and todos.
+-Create a Supabase project.
+-Setup authentication for users and policies.
+-Configure database and policies for users and todos.
+
 To create a Supabase project, visit the following link. Click on the "Start your project" button and login via GitHub (at the time of writing this article, they only support GitHub as an auth provider).
 
 Once you've created your account, click on New project where it will ask for the organization. By default, Supabase will create an organizational account for you with your username. I'll be using the default but you can create your own for this project.
 
 Once the organization is selected, Supabase will ask for the project name, database password, and region.
 
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
-Supabase Create Project
 Fill out this form and click on the Create new project button.
 
 Supabase will start setting up the application. It may take a few minutes to set up.
 
 Under the Project API keys section, you'll see two types of keys:
+
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
 
 Supabase Project API Keys
@@ -161,10 +161,12 @@ Now let's create a script to create tables in our database.
 
 Go to the SQL section from the sidebar and click on New query.
 
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
 SQL section from Supabase panel
 Click on New Query and copy-paste the following code:
 
+```java
 create table profiles (
   id uuid references auth.users not null,
   username text unique,
@@ -212,7 +214,10 @@ create policy "Anyone can upload an avatar."
 create policy "Anyone can update an avatar."
   on storage.objects for update
   with check ( bucket_id = 'avatars' );
+```  
+
 Profiles Script
+
 Let's understand this Profiles script piece by piece.
 
 First, we create table profiles that relate to users in our TodoApp. To understand how to set up unique in a table, we have set up username as a unique constraint and primary key as id.
@@ -223,9 +228,13 @@ After that, we enable real-time for our database. Realtime gives an event whenev
 
 Now click on the RUN button at the right corner and you'll get the following message:
 
+```java
 Success. No rows returned
+```
+
 Now let's create our todos table. For generating the table, click on the New query button and copy-paste the following script:
 
+```java
 create table todos (
   id bigint generated by default as identity primary key,
   user_id uuid references auth.users not null,
@@ -248,23 +257,39 @@ create policy "Individuals can update their own todos." on todos for
 
 create policy "Individuals can delete their own todos." on todos for
     delete using (auth.uid() = user_id);
+```
+
 Todos Script
+
 Now click on the RUN button at the right corner, and you'll get the following message:
 
+```java
 Success. No rows returned
+```
+
 To confirm our tables are generated, go to the table editor section from the sidebar.
 
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
 Table Editor section from Supabase panel
+
 Inside the table editor, you'll find our tables generated successfully.
+
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
 
 Supabase Table sidebar
+
 As you can see in the above Todos Script, we didn't enable real-time. To enable a real-time server, we need to go to the Database > Replication section.
+
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
 
 Database section from Supabase panel
+
 Here you'll see the following view:
+
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
 
 Supabase Database Replication Section
@@ -274,33 +299,51 @@ Now suppose we want to disable row-level security for todos (note that this is n
 
 Go to the Authentication section and, inside that, go to the Policies.
 
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+
 
 Authentication section from Supabase panel
 Now you'll see the todos section with RLS enabled written in the green box. Click on the Disable RLS option at the top right-hand corner of this box. It will disable the row-level security for our application.
 
-How to Implement Sign In Using Supabase
+# How to Implement Sign In Using Supabase
 The code for this section is available under this commit if you need to refer to it in the future for reference.
 
 GitHub - Sharvin26/TodoApp-supabase at b253c904f2f39ac80808620cf51c9584bfa90f4d
 A todoapp built using Supabase, ReactJS, NextJS and Chakra UI - GitHub - Sharvin26/TodoApp-supabase at b253c904f2f39ac80808620cf51c9584bfa90f4d
 
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+
+
 Sharvin26
+
 GitHub
+
 
 First, let's create our application using the following command:
 
+```java
 npx create-next-app todo_app 
+```
+
 It's time to install our dependencies and have a basic configuration in place.
 
-How to Install Chakra UI
+# How to Install Chakra UI
+
+```java
 npm i @chakra-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^4
+```
+
 Note: If you use zsh you'll need to add the escape character (\) after @ as follows:
 
+```java
 npm i @chakra-ui/react @emotion/react@\^11 @emotion/styled@\^11 framer-motion@\^4
+```
+
 Now let's clean up our code by removing the code that is not required and configuring ChakraUI into our application.
 
 As per Chakra's documentation, we need to wrap <Component /> with ChakraProvider in the pages/_app.js. Go to the _app.js and copy-paste the following code:
 
+```java
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import customTheme from "../lib/theme";
 
@@ -313,11 +356,15 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+```
+
 _app.js
+
 Let's create a directory under our root directory and name it lib. Under this directory, create a file named theme.js.
 
 Copy-paste the following code inside this file:
 
+```java
 import { extendTheme } from "@chakra-ui/react"
 
 const config = {
@@ -328,7 +375,10 @@ const config = {
 const theme = extendTheme({ config })
 
 export default theme
+```
+
 theme.js
+
 Now under the pages directory, create a _document.js file and copy-paste the following code:
 
 import { ColorModeScript } from "@chakra-ui/react"
@@ -351,6 +401,7 @@ export default class Document extends NextDocument {
   }
 }
 _document.js
+
 By creating _document.js and theme.js we have just set our color to be light by default.
 
 From ChakraUI version 1.6.12, it sets the system chosen color by default. So for some users who have dark mode enabled for the browser, the application will have a dark color theme. Dark mode is nice, but for starting purposes, we only want the color to be light.
@@ -379,9 +430,13 @@ const Home = () => {
 };
 
 export default Home;
+
 index.js
+
 How to Install the Supabase Client Library
+
 npm i @supabase/supabase-js
+
 Under lib directory create a file named client.js.
 
 Under that file copy paste the following code:
@@ -394,14 +449,18 @@ const SUPBASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const client = createClient(SUPABASE_URL, SUPBASE_ANON_KEY);
 
 export { client as supabaseClient };
+
 client.js
+
 Here we are just creating a Supabase Client which will be used throughout the project.
 
 Now under the root directory create a .env.local file and copy-paste the following part with Supabase URL and anon key:
 
 NEXT_PUBLIC_SUPABASE_URL=#Add_your_supabase_url 
 NEXT_PUBLIC_SUPABASE_ANON_KEY=#Add_your_supabase_key
+
 .env.local
+
 You can find the Supabase URL and anon key under the Settings > API section.
 
 Under Project API keys is the anon key and under Config is the URL.
@@ -410,9 +469,14 @@ With this, our Supabase client is configured and ready to use.
 
 Let's run our application using the following command:
 
+```java
 npm run dev
+```
+
 You'll get the following output:
 
+
+![Todo App Home Screen](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Todo App Home Screen")
 
 Todo App Home Screen
 Now under the pages directory, create a file named signin.js and copy-paste the following code:
@@ -605,7 +669,10 @@ We use SIGNED_IN event to set a cookie by calling /api/auth which uses another m
 Now let's restart our server using npm run dev and then go to http://localhost:3000/signin. You'll see the following UI:
 
 
+![Todo SignIn Page](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Todo SignIn Page")
+
 Todo SignIn Page
+
 Add your email and click the submit button. Go to the email and click on verify, and you'll be redirected to the / page.
 
 How to Show All Todos, Add New Todos, and Update and Delete Todos
@@ -653,7 +720,9 @@ const Home = () => {
 };
 
 export default Home;
+
 index.js
+
 Create a component directory under the root directory, and inside the component directory create a file named Navbar.js. Copy-paste the following content under that file:
 
 import { Box, Button, ButtonGroup, Flex, Heading } from "@chakra-ui/react";
@@ -718,8 +787,12 @@ Go to http://localhost:3000 and click on the Logout button.
 The cookie will be cleared from the browser, and the user will get redirected to the sign-in page.
 
 
+![TodoApp Home Page](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "TodoApp Home Page")
+
 TodoApp Home Page
-How to Add a Todo
+
+## How to Add a Todo
+
 Go to the Navbar.js and copy paste the following code:
 
 import { Box, Button, ButtonGroup, Flex, Heading } from "@chakra-ui/react";
@@ -969,11 +1042,15 @@ Here we are using useDisclosure hook from Chakra to maintain the modal state. Be
 Now go to http://localhost:3000 and click on Add Todo Button. You'll see the following screen:
 
 
+![Add Todo Modal](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Add Todo Modal")
+
 Add Todo Modal
+
 Fill out the form, click save, and then go to the Supabase todos table. You'll find that a new todo has been added to our table.
 
 Note: Supabase sometimes requires manual refresh when a new record is added.
-How to Get All Todos
+
+## How to Get All Todos
 So our todos are getting added successfully. Now let's work on getting all todos from a Supabase table.
 
 Under the components directory, create a file named SingleTodo.js and copy paste the following code:
@@ -1168,8 +1245,12 @@ Note: the Supabase docs suggest not using real time subscription on a server-sid
 Now go to http://localhost:3000 and add a todo. You'll see the following view:
 
 
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+
 All Todos
-How to Update a Todo
+
+## How to Update a Todo
+
 Updating the todo mechanism might be complex for beginners. So I'll explain the process as simply as I can:
 
 We create a todo state in our parent component of index.js. This todo state is updated when user clicks on SingleTodo.
@@ -1381,7 +1462,9 @@ const ManageTodo = ({ isOpen, onClose, initialRef, todo, setTodo }) => {
 };
 
 export default ManageTodo;
+
 ManageTodo.js
+
 Let's understand the code above. Here we are checking if the user has clicked on the update button ( By checking if todo exists ) and then showing the data in the initial object.
 
 Based upon the condition, showing update text instead of Save text on the button. Also, based upon condition, we execute supabase update if todo exists and if not then insert.
@@ -1510,8 +1593,12 @@ Here we add the ManageTodo component that we created and pass props that are use
 Now go to http://localhost:3000 and click on any todo to update it and you'll see the following view:
 
 
+![Update Todo](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Update Todo")
+
 Update Todo
-How to Delete a Todo
+
+## How to Delete a Todo
+
 This functionality will need us to update our some of existing code. First we will do that and then understand how it works and why changes are required.
 
 Go to the SingleTodo.js inside the components directory and replace the existing code with the following code:
@@ -1740,6 +1827,8 @@ For the useEffect which has the todoListener we add an if condition based on an 
 Go to http://localhost:3000 and you'll see the following view:
 
 
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+
 Click the Delete button and you'll see that the todo is gone from our todos view.
 
 With this we have completed our TODO CRUD operation flow.
@@ -1825,11 +1914,16 @@ To store our pictures we will be using Supabase storage. By default these storag
 Go to https://app.supabase.io/ and go to the storage tab. There you'll see the avatars listed under All Buckets.
 
 
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
+
 Click on the three dots and select the Make public option.
+
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
 
 Back to our code: inside the pages directory create a file named profile.js and copy paste the following code:
 
+```java
 import {
   Avatar,
   Box,
@@ -2019,12 +2113,18 @@ const Profile = () => {
 };
 
 export default Profile;
+```
+
 profile.js
+
 Here we have 4 FormControl elements, and each is pre-filled if a value exists. This is possible because on render useEffect runs which uses the Supabase client to fetch the user record from the auth and profiles tables.
 
 Note: the auth table is maintained by Supabase and can be accessed via client using following command:
 
+```java
 supabase.auth.user()
+```
+
 Except images, other records can be updated using the updateHandler function. This function updates the user record using id.
 
 The uploadHandler function is responsible for uploading the image to the storage bucket and setting the avatarurl in the profiles table for a record based on id.
@@ -2033,6 +2133,8 @@ The upload method from Supabase uploads the image while the getPublicUrl method 
 
 Visit http://localhost:3000 and click on profile link. You'll see the following view:
 
+
+![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
 
 Now you can use the update method to update your username, website URL, and bio.
 
@@ -2043,8 +2145,9 @@ Before deploying the application on Vercel we need to run the npm run build comm
 
 There are two ways to configure an application on Vercel:
 
-Using the Vercel npm library and pushing the code locally to a Vercel server
-Connecting the Vercel bot to the GitHub repository.
+- Using the Vercel npm library and pushing the code locally to a Vercel server
+- Connecting the Vercel bot to the GitHub repository.
+
 I am going to use the second method.
 
 You need to create a repository on GitHub and push the code over there.
@@ -2054,6 +2157,8 @@ If you haven't created an account on Vercel, then you can go to https://vercel.c
 Once you've created your account you'll be directed to a dashboard that looks like this:
 
 
+![Vercel Dashboard](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Dashboard")
+
 Vercel Dashboard
 Click on the New Project button. It will ask you to install the Vercel bot and permissions.
 
@@ -2062,10 +2167,14 @@ Note: You can allow the Vercel bot to read all repositories from your GitHub acc
 Click the Import button on the GitHub repository created above:
 
 
+![Vercel Import Project from Github](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Import Project from Github")
+
 Vercel Import Project from Github
 
 Now it will ask if you want to create a team. Team is a feature available under the Pro Plan. By default Vercel is under the hobby plan. For now I'll skip that.
 
+
+![Vercel Create Team](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Create Team")
 
 Vercel Create Team 
 Now you'll need to add environment variables. Add them from .env.local.
@@ -2073,13 +2182,19 @@ Now you'll need to add environment variables. Add them from .env.local.
 Click on the Accordion that's in front of Environment Variables and add the variables over there as follows:
 
 
+![Vercel Configure Env and Build Settings](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Configure Env and Build Settings")
+
 Vercel Configure Env and Build Settings
 Once they are added, click on the Deploy button. After the deployment is successful you'll get the following screen:
 
 
+![Vercel Deployment Success](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Deployment Success")
+
 Vercel Deployment Success
 Now click on the gray box where your application is shown. It will redirect you to a page where you can find preconfigured domain for your applications.
 
+
+![Vercel Project Overview](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Project Overview")
 
 Vercel Project Overview
 Yes vercel provides subdomains for which we can set a custom domain also. For now we will use the Vercel domain. Copy the first domain under the Domains section and go to your Supabase project.
@@ -2087,7 +2202,10 @@ Yes vercel provides subdomains for which we can set a custom domain also. For no
 Go to Authentication > Settings and update the Site URL and Additional Redirect URLs to the copied URL (make sure to add https:// in front of the copied URL):
 
 
+![Supabase Authentication Settings](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Supabase Authentication Settings")
+
 Supabase Authentication Settings
+
 With this, we have created our production-ready todo application. If you have built the app along with the tutorial, then a very big congratulations to you on this achievement.
 
 Thank you for reading!
