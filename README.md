@@ -381,6 +381,7 @@ theme.js
 
 Now under the pages directory, create a _document.js file and copy-paste the following code:
 
+```java
 import { ColorModeScript } from "@chakra-ui/react"
 import NextDocument, { Html, Head, Main, NextScript } from "next/document"
 import theme from "../lib/theme"
@@ -400,6 +401,8 @@ export default class Document extends NextDocument {
     )
   }
 }
+```
+
 _document.js
 
 By creating _document.js and theme.js we have just set our color to be light by default.
@@ -408,6 +411,7 @@ From ChakraUI version 1.6.12, it sets the system chosen color by default. So for
 
 Go to index.js and copy paste the following code:
 
+```java
 import { Box } from "@chakra-ui/react";
 import Head from "next/head";
 
@@ -430,17 +434,21 @@ const Home = () => {
 };
 
 export default Home;
+```
 
 index.js
 
-How to Install the Supabase Client Library
+## How to Install the Supabase Client Library
 
+```java
 npm i @supabase/supabase-js
+```
 
 Under lib directory create a file named client.js.
 
 Under that file copy paste the following code:
 
+```java
 import { createClient } from "@supabase/supabase-js";
 
 const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -449,6 +457,7 @@ const SUPBASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 const client = createClient(SUPABASE_URL, SUPBASE_ANON_KEY);
 
 export { client as supabaseClient };
+```
 
 client.js
 
@@ -456,8 +465,10 @@ Here we are just creating a Supabase Client which will be used throughout the pr
 
 Now under the root directory create a .env.local file and copy-paste the following part with Supabase URL and anon key:
 
+```java
 NEXT_PUBLIC_SUPABASE_URL=#Add_your_supabase_url 
 NEXT_PUBLIC_SUPABASE_ANON_KEY=#Add_your_supabase_key
+```
 
 .env.local
 
@@ -481,6 +492,7 @@ You'll get the following output:
 Todo App Home Screen
 Now under the pages directory, create a file named signin.js and copy-paste the following code:
 
+```java
 import {
   Alert,
   AlertIcon,
@@ -583,12 +595,17 @@ const SignIn = () => {
 };
 
 export default SignIn;
+```
+
 signin.js
+
 Here we have created a form and used a supabase auth method to sign in the user.
 
-Note: In supabaseClient.auth.signIn method, when you don't pass a password, it considers the authentication method as the magic link.
+Note: In supabaseClient.auth.signIn method, when you dont pass a password, it considers the authentication method as the magic link.
+
 Now go to the _app.js and copy paste the following code:
 
+```java
 import { ChakraProvider } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -651,15 +668,22 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
+```
+
 _app.js
+
 Now inside the API directory, remove the hello.js file and create a new file called auth.js. Copy-paste the following code in that new file:
 
+```java
 import { supabaseClient } from "../../lib/client";
 
 export default function handler(req, res) {
   supabaseClient.auth.api.setAuthCookie(req, res);
 }
+```
+
 auth.js
+
 The code under _app.js is crucial for authentication when the user clicks on the magic link.
 
 Supabase provides a listener method under the hood auth.onAuthStateChange which gives two events SIGNED_IN and SIGNED_OUT.
@@ -686,6 +710,7 @@ GitHub
 
 Before implementing Todo crud operations, let's implement the logout functionality. Go to index.js and replace the existing code with the following code:
 
+```java
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -720,11 +745,15 @@ const Home = () => {
 };
 
 export default Home;
+```
 
 index.js
 
-Create a component directory under the root directory, and inside the component directory create a file named Navbar.js. Copy-paste the following content under that file:
+Create a component directory under the root directory, and inside the component directory create a file named Navbar.js. 
 
+Copy-paste the following content under that file:
+
+```java
 import { Box, Button, ButtonGroup, Flex, Heading } from "@chakra-ui/react";
 import NavLink from "next/link";
 import { useRouter } from "next/router";
@@ -777,7 +806,10 @@ const Navbar = () => {
 };
 
 export default Navbar;
+```
+
 Navbar.js
+
 We have created a navbar component with a Profile link, Add Todo button, and a Logout button.
 
 The logoutHandler uses a Supabase method called signOut to clear the session and log us out of the application.
@@ -795,6 +827,7 @@ TodoApp Home Page
 
 Go to the Navbar.js and copy paste the following code:
 
+```java
 import { Box, Button, ButtonGroup, Flex, Heading } from "@chakra-ui/react";
 import NavLink from "next/link";
 import { useRouter } from "next/router";
@@ -849,11 +882,15 @@ const Navbar = ({ onOpen }) => {
 };
 
 export default Navbar;
+```
+
 Navbar.js
+
 Here we have just assigned an onClick handler to our Add Todo button which will open a modal to add a todo.
 
 Now create a file named ManageTodo.js under the components directory and copy paste the following code:
 
+```java
 import {
   Alert,
   AlertIcon,
@@ -984,11 +1021,15 @@ const ManageTodo = ({ isOpen, onClose, initialRef }) => {
 };
 
 export default ManageTodo;
+```
+
 ManageTodo.js
+
 This part will be responsible for adding and updating the todos. Here we have created a modal with a form and 3 form control elements.
 
 Once the form is submited we call a supabase server with following code:
 
+```java
 const { error } = await supabaseClient
       .from("todos")
       .insert([{ title, description, isComplete, user_id: user.id }]);
@@ -1036,7 +1077,10 @@ const Home = () => {
 };
 
 export default Home;
+```
+
 index.js
+
 Here we are using useDisclosure hook from Chakra to maintain the modal state. Besides that you'll see we have passed onOpen to the Navbar and added the ManageTodo component.
 
 Now go to http://localhost:3000 and click on Add Todo Button. You'll see the following screen:
@@ -1051,10 +1095,12 @@ Fill out the form, click save, and then go to the Supabase todos table. You'll f
 Note: Supabase sometimes requires manual refresh when a new record is added.
 
 ## How to Get All Todos
+
 So our todos are getting added successfully. Now let's work on getting all todos from a Supabase table.
 
 Under the components directory, create a file named SingleTodo.js and copy paste the following code:
 
+```java
 import { Box, Divider, Heading, Text, Tag } from "@chakra-ui/react";
 
 const SingleTodo = ({ todo }) => {
@@ -1102,11 +1148,15 @@ const SingleTodo = ({ todo }) => {
 };
 
 export default SingleTodo;
+```
+
 SingleTodo.js
+
 This is just UI code with a utitlity function converting the date to human readable format.
 
 Go to the index.js and replace the old code with following code:
 
+```java
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Box, SimpleGrid, Text, HStack, Tag } from "@chakra-ui/react";
 import Head from "next/head";
@@ -1201,11 +1251,13 @@ const Home = () => {
 };
 
 export default Home;
-
+```
 
 index.js
+
 Let's understand the code. Here we have added two useEffects:
 
+```java
   useEffect(() => {
     if (user) {
       supabaseClient
@@ -1220,8 +1272,11 @@ Let's understand the code. Here we have added two useEffects:
         });
     }
   }, [user]);
+```
+
 This useEffect is usefull when the page is rendered for the first time. We query data from the Supabase table for that particular user in descending fashion.
 
+```java
   useEffect(() => {
     const todoListener = supabaseClient
       .from("todos")
@@ -1239,9 +1294,12 @@ This useEffect is usefull when the page is rendered for the first time. We query
       todoListener.unsubscribe();
     };
   }, []);
+```
+
 This useEffect is a real time subscription with the Supabase real time server. Whenever a new todo is added we get the payload event which we use to add the todo in our local state.
 
 Note: the Supabase docs suggest not using real time subscription on a server-side application.
+
 Now go to http://localhost:3000 and add a todo. You'll see the following view:
 
 
@@ -1259,6 +1317,7 @@ In ManageTodo.js we have written a useEffect with a dependency of todo which upd
 At last we update the todo in our table using the Supbase update method on the basis of todo id.
 Time to implement the code. Under the components directory, go to SingleTodo.js and replace the code with the following:
 
+```java
 import { Box, Divider, Heading, Tag, Text } from "@chakra-ui/react";
 
 const SingleTodo = ({ todo, openHandler }) => {
@@ -1309,9 +1368,13 @@ const SingleTodo = ({ todo, openHandler }) => {
 };
 
 export default SingleTodo;
+```
+
 SingleTodo.js
+
 Under the components directory go to ManageTodo.js and replace the code with the following code:
 
+```java
 import {
   Alert,
   AlertIcon,
@@ -1462,6 +1525,7 @@ const ManageTodo = ({ isOpen, onClose, initialRef, todo, setTodo }) => {
 };
 
 export default ManageTodo;
+```
 
 ManageTodo.js
 
@@ -1471,6 +1535,7 @@ Based upon the condition, showing update text instead of Save text on the button
 
 Go to pages > index.js and replace the existing code with the following code:
 
+```java
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Box, HStack, SimpleGrid, Tag } from "@chakra-ui/react";
 import Head from "next/head";
@@ -1587,7 +1652,10 @@ const Home = () => {
 };
 
 export default Home;
+```
+
 index.js
+
 Here we add the ManageTodo component that we created and pass props that are used by this component.
 
 Now go to http://localhost:3000 and click on any todo to update it and you'll see the following view:
@@ -1603,6 +1671,7 @@ This functionality will need us to update our some of existing code. First we wi
 
 Go to the SingleTodo.js inside the components directory and replace the existing code with the following code:
 
+```java
 import {
   Box,
   Divider,
@@ -1675,13 +1744,17 @@ const SingleTodo = ({ todo, openHandler, deleteHandler, isDeleteLoading }) => {
 };
 
 export default SingleTodo;
+```
+
 SingleTodo.js
+
 Here we have added a delete button with an onClick event. Now this delete event is under another event which opens the modal. So whenever we click on delete it will open the modal too.
 
 We don't want this behavour, so we use a method from event called stopPropagation. This method doesn't allow events from children to be passed to the parent.
 
 Now go to the index.js inside the pages directory and replace the existing code with the following code:
 
+```java
 import { useDisclosure } from "@chakra-ui/hooks";
 import { Box, HStack, SimpleGrid, Tag } from "@chakra-ui/react";
 import Head from "next/head";
@@ -1819,7 +1892,10 @@ const Home = () => {
 };
 
 export default Home;
+```
+
 index.js
+
 Let's understand the deleteHandler method first. In this method we use the Supabase client to delete a record from the todos table. Once it's successfully deleted, we use the filter method to remove the todo from our local state.
 
 For the useEffect which has the todoListener we add an if condition based on an event type. We don't want to do anything on the DELETE event as we are updating the local state in deleteHandler.
@@ -1833,7 +1909,7 @@ Click the Delete button and you'll see that the todo is gone from our todos view
 
 With this we have completed our TODO CRUD operation flow.
 
-How to Update Profile Details and Avatars
+## How to Update Profile Details and Avatars
 The Profile Update Operation code is available under this commit if you need to refer to it in the future for reference.
 
 GitHub - Sharvin26/TodoApp-supabase at fb7055b83c847709cb6cc5c6aa26553ecee4026f
@@ -1846,6 +1922,7 @@ Before working on the profile section we have to make our TodoApp Heading as a r
 
 In Navbar.js under the components directory replace the existing code with the following code:
 
+```java
 import { Box, Button, ButtonGroup, Flex, Heading } from "@chakra-ui/react";
 import NavLink from "next/link";
 import { useRouter } from "next/router";
@@ -1906,7 +1983,10 @@ const Navbar = ({ onOpen }) => {
 };
 
 export default Navbar;
+```
+
 Navbar.js
+
 Let's start working on building the last part of our app which is the profile section. This section will have a form which can update the username, website, bio and an avatar.
 
 To store our pictures we will be using Supabase storage. By default these storage buckets are private and can be accessed using a token. But for the sake of this article we will make the bucket public. But if you are storing any sensitive information make sure to keep that bucket private.
