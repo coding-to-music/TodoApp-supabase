@@ -8,6 +8,8 @@ https://www.freecodecamp.org/news/how-to-build-a-todoapp-using-react-and-supabas
 
 https://github.com/coding-to-music/TodoApp-supabase
 
+![Architectural Diagram from Supabase documentation](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-12-04-at-6.06.45-PM-1.png?raw=true "Architectural Diagram from Supabase documentation")
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -55,6 +57,8 @@ If you're not and need to brush up, I would recommend that you go through the Re
 
 ## Here's what we're going to build
 
+![Architectural Diagram from Supabase documentation](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-12-04-at-5.49.41-PM.png?raw=true "Architectural Diagram from Supabase documentation")
+
 We'll build a ToDo app that looks like this:
 
 
@@ -91,20 +95,17 @@ As you already know, `Supabase` uses `Postgres` as a database – but it also ha
 
 One of my favorites is `Realtime`. Supabase uses the `Elixir` server to set up a web socket connection to listen for insert, update, and delete the events.
 
-`PostgRest` directly converts the Postgres database into a Rest API.
-
-`GoTrue` is an API for managing users and issuing SWT tokens.
-
-`Postgres-Meta` is a Restful API for managing the Postgres database.
-
-`Kong` is an API gateway.
+- `PostgRest` directly converts the Postgres database into a Rest API.
+- `GoTrue` is an API for managing users and issuing SWT tokens.
+- `Postgres-Meta` is a Restful API for managing the Postgres database.
+- `Kong` is an API gateway.
 
 Note: All these definitions are taken from the supabase documentation. To read more about how Supabase works, you can visit their documentation. https://supabase.io/docs
 
 And with that, we're ready to dive into our project. Here's what we'll cover:
 
 # Table of Contents
-- [How to configure Supabase tables, auth, and storage]()
+- [How to configure Supabase tables, auth, and storage](https://github.com/coding-to-music/TodoApp-supabase#how-to-configure-supabase-tables-auth-and-storage)
 - [How to implement sign-in using Supabase]()
 - [How to show all todos, add new todos, and update and delete todos]()
 - [How to update profile details and avatar]()
@@ -117,21 +118,17 @@ https://github.com/Sharvin26/TodoApp-supabase
 ## How to Configure Supabase Tables, Auth, and Storage
 In this section, we'll implement the following functionality:
 
--Create a Supabase project.
--Setup authentication for users and policies.
--Configure database and policies for users and todos.
+- Create a Supabase project. 
+- Setup authentication for users and policies. 
+- Configure database and policies for users and todos. 
 
-To create a Supabase project, visit the following link. Click on the "Start your project" button and login via GitHub (at the time of writing this article, they only support GitHub as an auth provider).
+To create a Supabase project, visit the following [link](https://supabase.io/). Click on the "Start your project" button and login via GitHub (at the time of writing this article, they only support GitHub as an auth provider).
 
 Once you've created your account, click on New project where it will ask for the organization. By default, Supabase will create an organizational account for you with your username. I'll be using the default but you can create your own for this project.
 
 Once the organization is selected, Supabase will ask for the project name, database password, and region.
 
-REAL ONE
-
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "XXXXXXXXX")
-
-REAL ONE
+![Fill out this form and click on the Create new project button](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Fill out this form and click on the Create new project button")
 
 Fill out this form and click on the Create new project button.
 
@@ -139,13 +136,13 @@ Supabase will start setting up the application. It may take a few minutes to set
 
 Under the Project API keys section, you'll see two types of keys:
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.48.10-PM.png?raw=true "XXXXXXXXX")
+![Supabase Project API Keys](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.48.10-PM.png?raw=true "Supabase Project API Keys")
 
 Supabase Project API Keys
 
-anon is a public API key and it can be used on the client-side.
+`anon` is a public API key and it can be used on the client-side.
 
-service_role is a private API key and you use it on the server-side only. This key can bypass the row-level security and mutate the data.
+`service_role` is a private API key and you use it on the server-side only. This key can bypass the row-level security and mutate the data.
 
 ## What is Row Level Security in Supabase?
 
@@ -157,7 +154,7 @@ But there are some cases where we don't want the data to be directly accessed by
 
 In these cases, we can set up row-level security, which specifies which data can be accessed using the anon key.
 
-To learn more about row-level security, read this documentation.
+To learn more about row-level security, read this [documentation](https://supabase.io/docs/learn/auth-deep-dive/auth-row-level-security).
 
 Returning back to the application, once the project is configured you'll get the following message "Welcome to your new project."
 
@@ -166,7 +163,7 @@ Now let's create a script to create tables in our database.
 
 Go to the SQL section from the sidebar and click on New query.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.59.51-PM.png?raw=true "XXXXXXXXX")
+![SQL section from Supabase panel](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.59.51-PM.png?raw=true "SQL section from Supabase panel")
 
 SQL section from Supabase panel
 
@@ -275,27 +272,26 @@ Success. No rows returned
 
 To confirm our tables are generated, go to the table editor section from the sidebar.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.28.59-PM.png?raw=true "XXXXXXXXX")
+![Table Editor section from Supabase panel](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.28.59-PM.png?raw=true "Table Editor section from Supabase panel")
 
 Table Editor section from Supabase panel
 
 Inside the table editor, you'll find our tables generated successfully.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.33.43-PM.png?raw=true "XXXXXXXXX")
-
+![Supabase Table sidebar](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.33.43-PM.png?raw=true "Supabase Table sidebar")
 
 Supabase Table sidebar
 
 As you can see in the above Todos Script, we didn't enable real-time. To enable a real-time server, we need to go to the Database > Replication section.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.36.33-PM.png?raw=true "XXXXXXXXX")
+![Database section from Supabase panel](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.36.33-PM.png?raw=true "Database section from Supabase panel")
 
 
 Database section from Supabase panel
 
 Here you'll see the following view:
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.38.08-PM.png?raw=true "XXXXXXXXX")
+![Supabase Database Replication Section](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.38.08-PM.png?raw=true "Supabase Database Replication Section")
 
 
 Supabase Database Replication Section
@@ -306,8 +302,7 @@ Now suppose we want to disable row-level security for todos (note that this is n
 
 Go to the Authentication section and, inside that, go to the Policies.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.41.50-PM.png?raw=true "XXXXXXXXX")
-
+![Authentication section from Supabase panel](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.41.50-PM.png?raw=true "Authentication section from Supabase panel")
 
 Authentication section from Supabase panel
 
@@ -1311,7 +1306,7 @@ Note: the Supabase docs suggest not using real time subscription on a server-sid
 Now go to http://localhost:3000 and add a todo. You'll see the following view:
 
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-06-at-8.09.06-PM.png?raw=true "XXXXXXXXX")
+![All Todos](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-06-at-8.09.06-PM.png?raw=true "All Todos")
 
 All Todos
 
@@ -1912,7 +1907,7 @@ For the useEffect which has the todoListener we add an if condition based on an 
 Go to http://localhost:3000 and you'll see the following view:
 
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-1.37.34-PM.png?raw=true "XXXXXXXXX")
+![Click the Delete button and you'll see that the todo is gone from our todos view.](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-1.37.34-PM.png?raw=true "Click the Delete button and you'll see that the todo is gone from our todos view.")
 
 Click the Delete button and you'll see that the todo is gone from our todos view.
 
@@ -2003,11 +1998,11 @@ To store our pictures we will be using Supabase storage. By default these storag
 Go to https://app.supabase.io/ and go to the storage tab. There you'll see the avatars listed under All Buckets.
 
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.43.07-PM.png?raw=true "XXXXXXXXX")
+![Click on the three dots and select the Make public option.](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.43.07-PM.png?raw=true "Click on the three dots and select the Make public option.")
 
 Click on the three dots and select the Make public option.
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.43.31-PM.png?raw=true "XXXXXXXXX")
+![Click on the three dots and select the Make public option.](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.43.31-PM.png?raw=true "Click on the three dots and select the Make public option.")
 
 
 Back to our code: inside the pages directory create a file named profile.js and copy paste the following code:
@@ -2223,7 +2218,7 @@ The upload method from Supabase uploads the image while the getPublicUrl method 
 Visit http://localhost:3000 and click on profile link. You'll see the following view:
 
 
-![XXXXXXXXX](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.55.59-PM.png?raw=true "XXXXXXXXX")
+![Now you can use the update method to update your username, website URL, and bio](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-7.55.59-PM.png?raw=true "Now you can use the update method to update your username, website URL, and bio")
 
 Now you can use the update method to update your username, website URL, and bio.
 
