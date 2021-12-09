@@ -2247,14 +2247,14 @@ Note: You can allow the Vercel bot to read all repositories from your GitHub acc
 Click the Import button on the GitHub repository created above:
 
 
-![Vercel Import Project from Github](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Import Project from Github")
+![Vercel Import Project from Github](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.29.42-PM.png?raw=true "Vercel Import Project from Github")
 
 Vercel Import Project from Github
 
 Now it will ask if you want to create a team. Team is a feature available under the Pro Plan. By default Vercel is under the hobby plan. For now I'll skip that.
 
 
-![Vercel Create Team](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Create Team")
+![Vercel Create Team](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.33.19-PM.png?raw=true "Vercel Create Team")
 
 Vercel Create Team 
 Now you'll need to add environment variables. Add them from .env.local.
@@ -2262,19 +2262,19 @@ Now you'll need to add environment variables. Add them from .env.local.
 Click on the Accordion that's in front of Environment Variables and add the variables over there as follows:
 
 
-![Vercel Configure Env and Build Settings](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Configure Env and Build Settings")
+![Vercel Configure Env and Build Settings](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.34.22-PM.png?raw=true "Vercel Configure Env and Build Settings")
 
 Vercel Configure Env and Build Settings
 Once they are added, click on the Deploy button. After the deployment is successful you'll get the following screen:
 
 
-![Vercel Deployment Success](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Deployment Success")
+![Vercel Deployment Success](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.39.20-PM.png?raw=true "Vercel Deployment Success")
 
 Vercel Deployment Success
 Now click on the gray box where your application is shown. It will redirect you to a page where you can find preconfigured domain for your applications.
 
 
-![Vercel Project Overview](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Vercel Project Overview")
+![Vercel Project Overview](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.42.16-PM.png?raw=true "Vercel Project Overview")
 
 Vercel Project Overview
 Yes vercel provides subdomains for which we can set a custom domain also. For now we will use the Vercel domain. Copy the first domain under the Domains section and go to your Supabase project.
@@ -2282,7 +2282,7 @@ Yes vercel provides subdomains for which we can set a custom domain also. For no
 Go to Authentication > Settings and update the Site URL and Additional Redirect URLs to the copied URL (make sure to add https:// in front of the copied URL):
 
 
-![Supabase Authentication Settings](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-12.34.24-PM.png?raw=true "Supabase Authentication Settings")
+![Supabase Authentication Settings](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.47.27-PM.png?raw=true "Supabase Authentication Settings")
 
 Supabase Authentication Settings
 
