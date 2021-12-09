@@ -341,7 +341,7 @@ npm i @chakra-ui/react @emotion/react@\^11 @emotion/styled@\^11 framer-motion@\^
 
 Now let's clean up our code by removing the code that is not required and configuring ChakraUI into our application.
 
-As per Chakra's documentation, we need to wrap <Component /> with ChakraProvider in the pages/_app.js. Go to the _app.js and copy-paste the following code:
+As per Chakra's documentation, we need to wrap `<Component />` with ChakraProvider in the `pages/_app.js`. Go to the `_app.js` and copy-paste the following code:
 
 ```java
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
@@ -379,7 +379,7 @@ export default theme
 
 theme.js
 
-Now under the pages directory, create a _document.js file and copy-paste the following code:
+Now under the pages directory, create a `_document.js` file and copy-paste the following code:
 
 ```java
 import { ColorModeScript } from "@chakra-ui/react"
@@ -405,11 +405,11 @@ export default class Document extends NextDocument {
 
 _document.js
 
-By creating _document.js and theme.js we have just set our color to be light by default.
+By creating `_document.js` and `theme.js` we have just set our color to be light by default.
 
-From ChakraUI version 1.6.12, it sets the system chosen color by default. So for some users who have dark mode enabled for the browser, the application will have a dark color theme. Dark mode is nice, but for starting purposes, we only want the color to be light.
+From ChakraUI version `1.6.12`, it sets the system chosen color by default. So for some users who have dark mode enabled for the browser, the application will have a dark color theme. Dark mode is nice, but for starting purposes, we only want the color to be light.
 
-Go to index.js and copy paste the following code:
+Go to `index.js` and copy paste the following code:
 
 ```java
 import { Box } from "@chakra-ui/react";
@@ -444,7 +444,7 @@ index.js
 npm i @supabase/supabase-js
 ```
 
-Under lib directory create a file named client.js.
+Under `lib` directory create a file named `client.js`.
 
 Under that file copy paste the following code:
 
@@ -463,7 +463,7 @@ client.js
 
 Here we are just creating a Supabase Client which will be used throughout the project.
 
-Now under the root directory create a .env.local file and copy-paste the following part with Supabase URL and anon key:
+Now under the root directory create a `.env.local` file and copy-paste the following part with `Supabase URL` and `anon` key:
 
 ```java
 NEXT_PUBLIC_SUPABASE_URL=#Add_your_supabase_url 
@@ -472,7 +472,7 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=#Add_your_supabase_key
 
 .env.local
 
-You can find the Supabase URL and anon key under the Settings > API section.
+You can find the `Supabase URL` and `anon key` under the `Settings > API` section.
 
 Under Project API keys is the anon key and under Config is the URL.
 
@@ -603,6 +603,19 @@ signin.js
 Here we have created a form and used a supabase auth method to sign in the user.
 
 Note: In supabaseClient.auth.signIn method, when you dont pass a password, it considers the authentication method as the magic link.
+
+.markdown-body .callout.callout_warn {
+  --text: #6a737d;  // theme text color default
+  --title: inherit; // theme title color (falls back to text color by default)
+  --background: #f8f8f9;
+  --border: #8b939c;
+}
+
+.markdown-body .callout[theme="🎅"] {
+  --background: #c54245;
+  --border: #ffffff6b;
+  --text: #f5fffa;
+}
 
 Now go to the _app.js and copy paste the following code:
 
