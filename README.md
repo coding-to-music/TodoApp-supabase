@@ -47,8 +47,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 By Sharvin Shah
 
-
-# How to Build a TodoApp using ReactJS, NextJS, and Supabase
 Hello folks, welcome to this tutorial. Today we're going to build a production-ready Todo application with React, Next, and Supabase.
 
 Before we begin, you should be familiar with the basics of React.js and Next.js to get the most out of this guide.
@@ -84,8 +82,9 @@ Supabase provides the following services:
 
 Now let's understand how it works:
 
+![Architectural Diagram from Supabase documentation](https://raw.githubusercontent.com/coding-to-music/TodoApp-supabase/main/images/011119_1057_PostmanTuto7.png "Architectural Diagram from Supabase documentation")
 
-Architectural Diagram from Supabase documentation
+
 
 Alright, what's going on here?
 
