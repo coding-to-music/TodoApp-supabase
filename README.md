@@ -82,7 +82,13 @@ Supabase provides the following services:
 
 Now let's understand how it works:
 
-![Architectural Diagram from Supabase documentation](https://raw.githubusercontent.com/coding-to-music/TodoApp-supabase/main/images/011119_1057_PostmanTuto7.png "Architectural Diagram from Supabase documentation")
+
+
+
+![Architectural Diagram from Supabase documentation](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-08-17-at-1.12.37-PM.png?raw=true "Architectural Diagram from Supabase documentation")
+
+![Architectural Diagram from Supabase documentation](
+    https://raw.githubusercontent.com/coding-to-music/TodoApp-supabase/main/images/011119_1057_PostmanTuto7.png "Architectural Diagram from Supabase documentation")
 
 
 
