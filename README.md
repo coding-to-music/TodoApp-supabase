@@ -602,22 +602,10 @@ signin.js
 
 Here we have created a form and used a supabase auth method to sign in the user.
 
-Note: In supabaseClient.auth.signIn method, when you dont pass a password, it considers the authentication method as the magic link.
+`Note`: In `supabaseClient.auth.signIn` method, when you dont pass a password, it considers the authentication method as the magic link.
 
-.markdown-body .callout.callout_warn {
-  --text: #6a737d;  // theme text color default
-  --title: inherit; // theme title color (falls back to text color by default)
-  --background: #f8f8f9;
-  --border: #8b939c;
-}
 
-.markdown-body .callout[theme="🎅"] {
-  --background: #c54245;
-  --border: #ffffff6b;
-  --text: #f5fffa;
-}
-
-Now go to the _app.js and copy paste the following code:
+Now go to the `_app.js` and copy paste the following code:
 
 ```java
 import { ChakraProvider } from "@chakra-ui/react";
@@ -698,11 +686,11 @@ export default function handler(req, res) {
 
 auth.js
 
-The code under _app.js is crucial for authentication when the user clicks on the magic link.
+The code under `_app.js` is crucial for authentication when the user clicks on the magic link.
 
-Supabase provides a listener method under the hood auth.onAuthStateChange which gives two events SIGNED_IN and SIGNED_OUT.
+Supabase provides a listener method under the hood `auth.onAuthStateChange` which gives two events `SIGNED_IN` and `SIGNED_OUT`.
 
-We use SIGNED_IN event to set a cookie by calling /api/auth which uses another method exposed by supabase. This method auth.api.setAuthCookie is useful to set cookies via server-side. Once the user is authenticated we push the user to the / page where all todos will be.
+We use `SIGNED_IN` event to set a cookie by calling `/api/auth` which uses another method exposed by supabase. This method `auth.api.setAuthCookie` is useful to set cookies via server-side. Once the user is authenticated we push the user to the `/` page where all todos will be.
 
 Now let's restart our server using npm run dev and then go to http://localhost:3000/signin. You'll see the following UI:
 
@@ -713,7 +701,7 @@ Todo SignIn Page
 
 Add your email and click the submit button. Go to the email and click on verify, and you'll be redirected to the / page.
 
-How to Show All Todos, Add New Todos, and Update and Delete Todos
+## How to Show All Todos, Add New Todos, and Update and Delete Todos
 The code is available under this commit if you need to refer to it in the future for reference.
 
 GitHub - Sharvin26/TodoApp-supabase at c2d1361b461d301549a813fda350c69a3e23e579
@@ -722,7 +710,7 @@ A todoapp built using Supabase, ReactJS, NextJS and Chakra UI - GitHub - Sharvin
 Sharvin26
 GitHub
 
-Before implementing Todo crud operations, let's implement the logout functionality. Go to index.js and replace the existing code with the following code:
+Before implementing Todo crud operations, let's implement the logout functionality. Go to `index.js` and replace the existing code with the following code:
 
 ```java
 import Head from "next/head";
@@ -763,7 +751,7 @@ export default Home;
 
 index.js
 
-Create a component directory under the root directory, and inside the component directory create a file named Navbar.js. 
+Create a `component` directory under the root directory, and inside the component directory create a file named `Navbar.js`. 
 
 Copy-paste the following content under that file:
 
@@ -826,7 +814,7 @@ Navbar.js
 
 We have created a navbar component with a Profile link, Add Todo button, and a Logout button.
 
-The logoutHandler uses a Supabase method called signOut to clear the session and log us out of the application.
+The `logoutHandler` uses a Supabase method called `signOut` to clear the session and log us out of the application.
 
 Go to http://localhost:3000 and click on the Logout button.
 
@@ -902,7 +890,7 @@ Navbar.js
 
 Here we have just assigned an onClick handler to our Add Todo button which will open a modal to add a todo.
 
-Now create a file named ManageTodo.js under the components directory and copy paste the following code:
+Now create a file named `ManageTodo.js` under the components directory and copy paste the following code:
 
 ```java
 import {
@@ -1097,9 +1085,9 @@ export default Home;
 
 index.js
 
-Here we are using useDisclosure hook from Chakra to maintain the modal state. Besides that you'll see we have passed onOpen to the Navbar and added the ManageTodo component.
+Here we are using `useDisclosure` hook from Chakra to maintain the modal state. Besides that you'll see we have passed `onOpen` to the Navbar and added the ManageTodo component.
 
-Now go to http://localhost:3000 and click on Add Todo Button. You'll see the following screen:
+Now go to http://localhost:3000 and click on `Add Todo` Button. You'll see the following screen:
 
 
 ![Add Todo Modal](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-06-at-7.24.27-PM.png?raw=true "Add Todo Modal")
@@ -1327,12 +1315,12 @@ All Todos
 
 Updating the todo mechanism might be complex for beginners. So I'll explain the process as simply as I can:
 
-- We create a todo state in our parent component of index.js. This todo state is updated when user clicks on SingleTodo.
-- We pass an openHandler function for doing that. This function updates the todo state with the clicked todo detail and opens the modal.
-- In ManageTodo.js we have written a useEffect with a dependency of todo which updates the values of title, description, and isComplete whenever the todo changes.
+- We create a todo state in our parent component of `index.js`. This todo state is updated when user clicks on SingleTodo.
+- We pass an `openHandler` function for doing that. This function updates the todo state with the clicked todo detail and opens the modal.
+- In `ManageTodo.js` we have written a `useEffect` with a dependency of `todo` which updates the values of title, description, and isComplete whenever the todo changes.
 - At last we update the todo in our table using the Supbase update method on the basis of todo id.
 
-Time to implement the code. Under the components directory, go to SingleTodo.js and replace the code with the following:
+Time to implement the code. Under the components directory, go to `SingleTodo.js` and replace the code with the following:
 
 ```java
 import { Box, Divider, Heading, Tag, Text } from "@chakra-ui/react";
@@ -1389,7 +1377,7 @@ export default SingleTodo;
 
 SingleTodo.js
 
-Under the components directory go to ManageTodo.js and replace the code with the following code:
+Under the components directory go to `ManageTodo.js` and replace the code with the following code:
 
 ```java
 import {
@@ -1550,7 +1538,7 @@ Let's understand the code above. Here we are checking if the user has clicked on
 
 Based upon the condition, showing update text instead of Save text on the button. Also, based upon condition, we execute supabase update if todo exists and if not then insert.
 
-Go to pages > index.js and replace the existing code with the following code:
+Go to `pages > index.js` and replace the existing code with the following code:
 
 ```java
 import { useDisclosure } from "@chakra-ui/hooks";
@@ -1673,7 +1661,7 @@ export default Home;
 
 index.js
 
-Here we add the ManageTodo component that we created and pass props that are used by this component.
+Here we add the `ManageTodo` component that we created and pass props that are used by this component.
 
 Now go to http://localhost:3000 and click on any todo to update it and you'll see the following view:
 
@@ -1686,7 +1674,7 @@ Update Todo
 
 This functionality will need us to update our some of existing code. First we will do that and then understand how it works and why changes are required.
 
-Go to the SingleTodo.js inside the components directory and replace the existing code with the following code:
+Go to the `SingleTodo.js` inside the components directory and replace the existing code with the following code:
 
 ```java
 import {
@@ -1765,11 +1753,11 @@ export default SingleTodo;
 
 SingleTodo.js
 
-Here we have added a delete button with an onClick event. Now this delete event is under another event which opens the modal. So whenever we click on delete it will open the modal too.
+Here we have added a `delete button` with an `onClick` event. Now this `delete` event is under another event which opens the modal. So whenever we click on delete it will open the modal too.
 
-We don't want this behavour, so we use a method from event called stopPropagation. This method doesn't allow events from children to be passed to the parent.
+We don't want this behavour, so we use a method from event called `stopPropagation`. This method doesn't allow events from children to be passed to the parent.
 
-Now go to the index.js inside the pages directory and replace the existing code with the following code:
+Now go to the `index.js` inside the pages directory and replace the existing code with the following code:
 
 ```java
 import { useDisclosure } from "@chakra-ui/hooks";
@@ -1913,16 +1901,16 @@ export default Home;
 
 index.js
 
-Let's understand the deleteHandler method first. In this method we use the Supabase client to delete a record from the todos table. Once it's successfully deleted, we use the filter method to remove the todo from our local state.
+Let's understand the `deleteHandler` method first. In this method we use the Supabase client to delete a record from the todos table. Once it's successfully deleted, we use the `filter` method to remove the todo from our local state.
 
-For the useEffect which has the todoListener we add an if condition based on an event type. We don't want to do anything on the DELETE event as we are updating the local state in deleteHandler.
+For the `useEffect` which has the `todoListener` we add an if condition based on an event type. We don't want to do anything on the `DELETE` event as we are updating the local state in `deleteHandler`.
 
 Go to http://localhost:3000 and you'll see the following view:
 
 
 ![Click the Delete button and you'll see that the todo is gone from our todos view.](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-1.37.34-PM.png?raw=true "Click the Delete button and you'll see that the todo is gone from our todos view.")
 
-Click the Delete button and you'll see that the todo is gone from our todos view.
+Click the `Delete` button and you'll see that the todo is gone from our todos view.
 
 With this we have completed our TODO CRUD operation flow.
 
@@ -1937,7 +1925,7 @@ GitHub
 
 Before working on the profile section we have to make our TodoApp Heading as a route so we can go back to the home page from the profile page.
 
-In Navbar.js under the components directory replace the existing code with the following code:
+In `Navbar.js` under the `components` directory replace the existing code with the following code:
 
 ```java
 import { Box, Button, ButtonGroup, Flex, Heading } from "@chakra-ui/react";
@@ -2214,7 +2202,7 @@ export default Profile;
 
 profile.js
 
-Here we have 4 FormControl elements, and each is pre-filled if a value exists. This is possible because on render useEffect runs which uses the Supabase client to fetch the user record from the auth and profiles tables.
+Here we have 4 `FormControl` elements, and each is pre-filled if a value exists. This is possible because on render `useEffect` runs which uses the Supabase client to fetch the user record from the `auth` and `profiles` tables.
 
 Note: the auth table is maintained by Supabase and can be accessed via client using following command:
 
@@ -2222,11 +2210,11 @@ Note: the auth table is maintained by Supabase and can be accessed via client us
 supabase.auth.user()
 ```
 
-Except images, other records can be updated using the updateHandler function. This function updates the user record using id.
+Except images, other records can be updated using the `updateHandler` function. This function updates the user record using `id`.
 
-The uploadHandler function is responsible for uploading the image to the storage bucket and setting the avatarurl in the profiles table for a record based on id.
+The `uploadHandler` function is responsible for uploading the image to the storage bucket and setting the avatarurl in the profiles table for a record based on id.
 
-The upload method from Supabase uploads the image while the getPublicUrl method gives us a public URL of the image. We use the from('profiles').update method to update the record.
+The `upload` method from Supabase uploads the image while the `getPublicUrl` method gives us a public URL of the image. We use the `from('profiles').update` method to update the record.
 
 Visit http://localhost:3000 and click on profile link. You'll see the following view:
 
@@ -2239,11 +2227,11 @@ With this our TodoApp is completed and ready for production.
 
 ## How to Deploy the App to Vercel and Configure Supabase Authentication
 
-Before deploying the application on Vercel we need to run the npm run build command and check the terminal output to see if we have any errors.
+Before deploying the application on Vercel we need to run the `npm run build` command and check the terminal output to see if we have any errors.
 
 There are two ways to configure an application on Vercel:
 
-- Using the Vercel npm library and pushing the code locally to a Vercel server
+- Using the [Vercel npm library](https://www.npmjs.com/package/vercel) and pushing the code locally to a Vercel server
 - Connecting the Vercel bot to the GitHub repository.
 
 I am going to use the second method.
@@ -2259,7 +2247,7 @@ Once you've created your account you'll be directed to a dashboard that looks li
 
 Vercel Dashboard
 
-Click on the New Project button. It will ask you to install the Vercel bot and permissions.
+Click on the `New Project` button. It will ask you to install the Vercel bot and permissions.
 
 Note: You can allow the Vercel bot to read all repositories from your GitHub account or give permission for the currently created repository.
 
@@ -2277,7 +2265,7 @@ Now it will ask if you want to create a team. Team is a feature available under 
 
 Vercel Create Team 
 
-Now you'll need to add environment variables. Add them from .env.local.
+Now you'll need to add environment variables. Add them from `.env.local`.
 
 Click on the Accordion that's in front of Environment Variables and add the variables over there as follows:
 
@@ -2302,7 +2290,7 @@ Vercel Project Overview
 
 Yes vercel provides subdomains for which we can set a custom domain also. For now we will use the Vercel domain. Copy the first domain under the Domains section and go to your Supabase project.
 
-Go to Authentication > Settings and update the Site URL and Additional Redirect URLs to the copied URL (make sure to add https:// in front of the copied URL):
+Go to `Authentication > Settings` and update the Site URL and Additional Redirect URLs to the copied URL (make sure to add `https://` in front of the copied URL):
 
 
 ![Supabase Authentication Settings](https://github.com/coding-to-music/TodoApp-supabase/blob/main/images/Screenshot-2021-11-07-at-8.47.27-PM.png?raw=true "Supabase Authentication Settings")
@@ -2312,7 +2300,7 @@ Supabase Authentication Settings
 With this, we have created our production-ready todo application. If you have built the app along with the tutorial, then a very big congratulations to you on this achievement.
 
 Thank you for reading!
-Feel free to connect with me on Twitter and Github.
+Feel free to connect with me on [Twitter](https://twitter.com/sharvinshah26) and [Github](https://github.com/Sharvin26).
 
 If you want any project to be developed or want to consult with me, you can DM me on my Twitter (@sharvinshah26).
 
