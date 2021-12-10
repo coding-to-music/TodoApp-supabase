@@ -322,7 +322,62 @@ GitHub
 First, let's create our application using the following command:
 
 ```java
-npx create-next-app todo_app 
+npx create-next-app supabase-nextjs-todo-app 
+```
+
+Output
+```
+Need to install the following packages:
+  create-next-app
+Ok to proceed? (y) y
+Creating a new Next.js app in /mnt/ap/ap/supabase-nextjs-todo-app.
+
+Using npm.
+
+Installing dependencies:
+- react
+- react-dom
+- next
+
+
+added 295 packages, and audited 296 packages in 17s
+
+51 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+Installing devDependencies:
+- eslint
+- eslint-config-next
+
+
+added 173 packages, and audited 469 packages in 15s
+
+83 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+Initialized a git repository.
+
+Success! Created supabase-nextjs-todo-app at /mnt/ap/ap/supabase-nextjs-todo-app
+Inside that directory, you can run several commands:
+
+  npm run dev
+    Starts the development server.
+
+  npm run build
+    Builds the app for production.
+
+  npm start
+    Runs the built app in production mode.
+
+We suggest that you begin by typing:
+
+  cd supabase-nextjs-todo-app
+  npm run dev
+
 ```
 
 It's time to install our dependencies and have a basic configuration in place.
